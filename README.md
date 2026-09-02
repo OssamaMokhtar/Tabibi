@@ -34,11 +34,26 @@ cp .env.local.example .env.local    # add your GEMINI_API_KEY
 npm run dev
 ```
 
+## Architecture
+
+Gemini is called **server-side only** (`server.ts`). The browser posts to `/api/triage`; the API key never reaches the client, and a build-time check asserts it cannot.
+
+User input is passed inside delimited `<symptoms>` and `<user_context>` blocks rather than concatenated into the system instruction, and the system prompt explicitly instructs the model to treat that content as data. The endpoint is rate limited to 10 requests per minute per IP.
+
+## Quality bar
+
+Triage quality is measured, not assumed — see [`evals/`](evals/).
+
+Recall on `EMERGENCY` is the primary metric, and **a single missed emergency fails the run**. Over-triage never fails it: classifying a cold as worth a GP visit costs an afternoon, while classifying a heart attack as self-care costs a life. The suite also includes prompt-injection cases that attempt to force a `SELF_CARE` result out of genuine emergency symptoms.
+
+```bash
+npm run dev        # terminal 1
+npm run test:eval  # terminal 2
+```
+
 ## Status
 
-Prototype — ~1,500 lines. Runs locally for demonstration.
-
-**Before any deployment:** Gemini calls currently originate in the client. They must be moved behind a server proxy so the API key is never shipped in the bundle.
+Prototype — ~1,500 lines. Runs locally for demonstration. Eval labels are written for engineering regression testing and require clinical review before real-world use.
 
 ## License
 
