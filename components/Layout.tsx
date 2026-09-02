@@ -44,7 +44,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 overflow-y-auto pb-20 md:pb-6 px-4 py-6 max-w-7xl mx-auto w-full">
+      <main className="flex-1 overflow-y-auto pb-20 md:pb-6 px-4 md:ps-72 md:pe-8 py-6 max-w-7xl mx-auto w-full">
         {children}
       </main>
 
@@ -89,7 +89,6 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
       </nav>
       
       {/* Spacer for desktop sidebar */}
-      <div className="hidden md:block w-64 fixed top-16 bottom-0 start-0 -z-10"></div>
     </div>
   );
 };

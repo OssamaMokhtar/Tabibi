@@ -4,6 +4,12 @@
 
 `TypeScript` · `React` · `Vite` · `Gemini`
 
+| English | العربية |
+|---|---|
+| ![Tabibi dashboard, English](docs/screenshot-en.png) | ![Tabibi dashboard, Arabic](docs/screenshot-ar.png) |
+
+*The same screen in both directions. Layout uses CSS logical properties, so RTL mirrors structurally rather than being a translated LTR page.*
+
 ---
 
 ## The problem
